@@ -11,7 +11,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   var myDirectory = await getApplicationDocumentsDirectory();
-  Hive.init(myDirectory.path);
+  Hive.init(myDirectory.path); 
 
 
   // Initialize the database
