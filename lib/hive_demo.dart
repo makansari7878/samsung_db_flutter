@@ -10,6 +10,7 @@ class HiveDemo extends StatefulWidget {
 
 class _HiveDemoState extends State<HiveDemo> {
 
+  bool _showData = false;
   storeData() async{
     var box = await Hive.openBox('hivefile');
     box.put('studentName', 'ANSARI');
@@ -35,7 +36,7 @@ class _HiveDemoState extends State<HiveDemo> {
           return Column(
             children: [
               Text('Student Name : ${box.get('studentName', defaultValue: 'unknown')}',
-                style: TextStyle(color: Colors.white),),
+                style: TextStyle(color: Colors.white, fontSize: 22),),
               Text('Student Age : ${box.get('age' , defaultValue: 'N/A')}'),
               Text('Student Email : ${details['email'] ?? "N/A"}' ),
               Text('Student Email : ${details['phone'] ?? "N/A"}' )
@@ -60,9 +61,16 @@ class _HiveDemoState extends State<HiveDemo> {
           SizedBox(height: 40,),
           Row(
             children: [
-              ElevatedButton(onPressed: showData, child: Text('show Data')),
+              ElevatedButton(onPressed: (){
+                setState(() {
+                  _showData = true;  // Show the FutureBuilder widget
+                });
+              }, child: Text('show Data')),
             ],
           ),
+          SizedBox(height: 40,),
+          if (_showData) showData(),
+
         ],
     )
     );
