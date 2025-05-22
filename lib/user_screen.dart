@@ -66,7 +66,10 @@ class _UserScreenState extends State<UserScreen> {
                   child: const Text('Add User'),
                 ),
                 ElevatedButton(
-                  onPressed: _showUsers,
+
+                  onPressed: (){
+                    _showModalBottomSheet(context);
+                  },
                   child: const Text('Show Users'),
                 ),
               ],
@@ -97,4 +100,32 @@ class _UserScreenState extends State<UserScreen> {
     _phoneController.dispose();
     super.dispose();
   }
+
+  void _showModalBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return Container(
+          height: 200,
+          padding: EdgeInsets.all(16),
+          child: Column(
+            children: [
+              Text("Choose an option", style: TextStyle(fontSize: 18)),
+              ListTile(
+                leading: Icon(Icons.share),
+                title: Text("Share"),
+                onTap: () => Navigator.pop(context),
+              ),
+              ListTile(
+                leading: Icon(Icons.save),
+                title: Text("Save"),
+                onTap: () => Navigator.pop(context),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
 }
